@@ -1,1 +1,466 @@
-h
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "New universal media player",
+        "description": "Just the basics. When it's created, press the gear / Configure button on the integration to set up its state, details and buttons. Everything is point-and-click, no YAML needed.",
+        "data": {
+          "name": "Name",
+          "device_class": "Device class",
+          "children": "Children"
+        },
+        "data_description": {
+          "children": "Optional. The player follows the first child that is playing (not off or idle), and passes anything you don't set up yourself on to it."
+        }
+      }
+    },
+    "error": {
+      "invalid_template": "That template has a syntax error.",
+      "invalid_actions": "Those actions aren't valid. Check the YAML.",
+      "invalid_object": "This must be a YAML dictionary (key: value)."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Universal Media Player",
+        "description": "Pick what you want to set up. Everything saves as you go. Choose **Save & close** when you're finished.\n\n{summary}",
+        "menu_options": {
+          "general": "Basics: children, look, media browser",
+          "state": "State: on, off, playing...",
+          "active_child": "Active child: which child to follow",
+          "attributes_media": "What's playing: title, artist, artwork, duration...",
+          "attributes_player": "Player info: volume, muted, source, shuffle, repeat",
+          "custom_attrs": "Extra attributes (your own)",
+          "actions_playback": "Buttons: play, pause, stop, next, previous, seek",
+          "actions_power": "Buttons: power and volume",
+          "actions_other": "Buttons: repeat, shuffle, play media, grouping, source and sound mode pickers",
+          "sources": "Sources (inputs)",
+          "sound_modes": "Sound modes",
+          "advanced": "Advanced: write templates / YAML yourself",
+          "finish": "Save & close"
+        }
+      },
+      "general": {
+        "title": "Basics",
+        "description": "All optional.",
+        "data": {
+          "children": "Children",
+          "device_class": "Device class",
+          "icon": "Icon",
+          "browse_media_entity_id": "Media browser from",
+          "search_media_entity_id": "Media search from"
+        },
+        "data_description": {
+          "children": "Put them in order. The player follows the first one that is playing (not off or idle).",
+          "browse_media_entity_id": "Borrow one player's media browser. Uses the active child if empty.",
+          "search_media_entity_id": "Borrow one player's media search. Uses the active child if empty."
+        }
+      },
+      "attributes_media": {
+        "title": "What's playing",
+        "description": "Pick one to set it up. A ✓ means it's already set.",
+        "data": {
+          "choice": "Choose one"
+        }
+      },
+      "attributes_player": {
+        "title": "Player info",
+        "description": "Pick one to set it up. A ✓ means it's already set.",
+        "data": {
+          "choice": "Choose one"
+        }
+      },
+      "actions_playback": {
+        "title": "Playback buttons",
+        "description": "Pick one to set it up. A ✓ means it's already set. You'll choose what happens when it's pressed.",
+        "data": {
+          "choice": "Choose one"
+        }
+      },
+      "actions_power": {
+        "title": "Power and volume buttons",
+        "description": "Pick one to set it up. A ✓ means it's already set. You'll choose what happens when it's pressed.",
+        "data": {
+          "choice": "Choose one"
+        }
+      },
+      "actions_other": {
+        "title": "Other buttons",
+        "description": "Pick one to set it up. A ✓ means it's already set. You'll choose what happens when it's pressed.",
+        "data": {
+          "choice": "Choose one"
+        }
+      },
+      "value_start": {
+        "title": "{label}: where does it come from?",
+        "description": "{help}\n\nCurrently: {current}",
+        "data": {
+          "mode": "Choose how to set it"
+        }
+      },
+      "value_entity": {
+        "title": "{label}: pick an entity",
+        "description": "Choose the entity to read from.",
+        "data": {
+          "entity": "Entity",
+          "scale_100": "Value is 0-100 (convert to 0-1)"
+        },
+        "data_description": {
+          "scale_100": "Turn this on if the entity reports volume as a percentage."
+        }
+      },
+      "value_attribute": {
+        "title": "{label}: pick an attribute",
+        "description": "Which attribute of {entity} should be used? Pick from the list, or type one.",
+        "data": {
+          "attribute": "Attribute",
+          "scale_100": "Value is 0-100 (convert to 0-1)"
+        },
+        "data_description": {
+          "scale_100": "Turn this on if the entity reports volume as a percentage."
+        }
+      },
+      "value_states": {
+        "title": "{label}: which states?",
+        "description": "Choose every state of {entity} that counts as yes. Pick from the list or type your own and press Enter.",
+        "data": {
+          "states": "States"
+        }
+      },
+      "value_state_map": {
+        "title": "State: match up the states",
+        "description": "For each player state, choose which states of {entity} mean it. Leave blank the ones you don't need. Pick from the list or type your own and press Enter.",
+        "data": {
+          "when_playing": "Playing when it is",
+          "when_paused": "Paused when it is",
+          "when_idle": "Idle when it is",
+          "when_on": "On when it is",
+          "when_off": "Off when it is",
+          "when_standby": "Standby when it is",
+          "when_buffering": "Buffering when it is",
+          "fallback": "If nothing above matches, show as"
+        }
+      },
+      "value_fixed": {
+        "title": "{label}: fixed value",
+        "description": "This text will always be used.",
+        "data": {
+          "text": "Value"
+        }
+      },
+      "value_custom": {
+        "title": "{label}: template",
+        "description": "Advanced. Write a template that gives the value.",
+        "data": {
+          "template": "Template"
+        }
+      },
+      "custom_attrs": {
+        "title": "Extra attributes",
+        "description": "Add anything you like to the player as an extra attribute. You have {count} so far.",
+        "menu_options": {
+          "custom_attr_add": "Add or change an attribute",
+          "custom_attr_remove": "Remove attributes",
+          "init": "Back"
+        }
+      },
+      "custom_attr_add": {
+        "title": "Add or change an attribute",
+        "description": "Give it a name, or pick an existing one to change it. Next you'll choose where its value comes from.",
+        "data": {
+          "name": "Attribute name"
+        }
+      },
+      "custom_attr_remove": {
+        "title": "Remove attributes",
+        "description": "",
+        "data": {
+          "names": "Attributes to remove"
+        }
+      },
+      "actions_existing": {
+        "title": "{label}: already set up",
+        "description": "Right now it does:\n\n{current}",
+        "menu_options": {
+          "action_replace": "Start over with a new action",
+          "action_add": "Add another step after these",
+          "action_yaml_edit": "Advanced: edit as YAML",
+          "action_remove": "Remove it",
+          "actions_done": "Back"
+        }
+      },
+      "action_type": {
+        "title": "{label}: what should happen?",
+        "description": "Choose what this does when it's used.\n\nValues you can use: {vars}",
+        "data": {
+          "type": "Choose one"
+        }
+      },
+      "action_forward": {
+        "title": "{label}: pass it on",
+        "description": "The other player will do the same thing, using the value it's given.",
+        "data": {
+          "entity": "Media player",
+          "target_name": "Name on that player"
+        },
+        "data_description": {
+          "target_name": "Optional. Only needed if that player calls it something different."
+        }
+      },
+      "action_call_entity": {
+        "title": "{label}: control a device",
+        "description": "Which device or entity should be controlled?",
+        "data": {
+          "entity": "Entity"
+        }
+      },
+      "action_call_service": {
+        "title": "{label}: what should it do?",
+        "description": "What should happen to {entity}? Pick from the list, or type any service name.",
+        "data": {
+          "service": "Action"
+        }
+      },
+      "action_call_fields": {
+        "title": "{label}: details",
+        "description": "A little more detail for {entity}.",
+        "data": {
+          "seek_position": "Position (seconds)",
+          "volume_level": "Volume (0 to 1)",
+          "is_volume_muted": "Mute",
+          "source": "Source name",
+          "sound_mode": "Sound mode name",
+          "repeat": "Repeat",
+          "shuffle": "Shuffle",
+          "media_content_id": "Media to play",
+          "media_content_type": "Media type",
+          "group_members": "Players to group with",
+          "command": "Command (separate several with commas)",
+          "device": "Device (optional)",
+          "option": "Option",
+          "value": "Value",
+          "scale_100": "Convert volume from 0-1 to 0-100"
+        },
+        "data_description": {
+          "scale_100": "Turn this on if the device expects a volume from 0 to 100."
+        }
+      },
+      "action_wait": {
+        "title": "{label}: wait",
+        "description": "Pause before the next step runs.",
+        "data": {
+          "seconds": "Seconds"
+        }
+      },
+      "action_yaml": {
+        "title": "{label}: actions",
+        "description": "Advanced. Build the actions in the editor, or switch it to YAML mode. Values you can use: {vars}",
+        "data": {
+          "actions": "Actions"
+        }
+      },
+      "action_more": {
+        "title": "{label}: saved",
+        "description": "Saved. This is what it does now:\n\n{current}",
+        "menu_options": {
+          "action_type": "Add another step (for example, also turn on a second device)",
+          "actions_done": "Done"
+        }
+      },
+      "sources": {
+        "title": "Sources",
+        "description": "Each source is a name, plus what happens when someone picks it. You have {count} so far.",
+        "menu_options": {
+          "sources_edit": "Add or change a source",
+          "sources_remove": "Remove sources",
+          "init": "Back"
+        }
+      },
+      "sources_edit": {
+        "title": "Add or change a source",
+        "description": "Pick a source from the list (names from your children are suggested, and ✓ marks ones you've set up), or type a new name.",
+        "data": {
+          "name": "Source name"
+        }
+      },
+      "sources_remove": {
+        "title": "Remove sources",
+        "description": "",
+        "data": {
+          "names": "Sources to remove"
+        }
+      },
+      "sound_modes": {
+        "title": "Sound modes",
+        "description": "Each sound mode is a name, plus what happens when someone picks it. You have {count} so far.",
+        "menu_options": {
+          "sound_modes_edit": "Add or change a sound mode",
+          "sound_modes_remove": "Remove sound modes",
+          "init": "Back"
+        }
+      },
+      "sound_modes_edit": {
+        "title": "Add or change a sound mode",
+        "description": "Pick a sound mode from the list (names from your children are suggested, and ✓ marks ones you've set up), or type a new name.",
+        "data": {
+          "name": "Sound mode name"
+        }
+      },
+      "sound_modes_remove": {
+        "title": "Remove sound modes",
+        "description": "",
+        "data": {
+          "names": "Sound modes to remove"
+        }
+      },
+      "advanced": {
+        "title": "Advanced",
+        "description": "For power users: write templates and YAML directly. Anything set here shows up in the simple menus too.",
+        "menu_options": {
+          "adv_general": "State and active child templates",
+          "adv_attributes_media": "Templates: what's playing",
+          "adv_attributes_player": "Templates: player info",
+          "adv_custom_attributes": "Templates: extra attributes",
+          "adv_services_playback": "YAML: playback buttons",
+          "adv_services_power": "YAML: power and volume buttons",
+          "adv_services_other": "YAML: other buttons",
+          "init": "Back"
+        }
+      },
+      "adv_general": {
+        "title": "Advanced: general",
+        "description": "Templates. All optional.",
+        "data": {
+          "state": "State template",
+          "active_child_template": "Active child template"
+        },
+        "data_description": {
+          "state": "Must give one of: on, off, idle, playing, paused, standby, buffering. 'off' always wins over the children.",
+          "active_child_template": "Must give the entity_id of the child to follow, or none for the automatic choice."
+        }
+      },
+      "adv_attributes_media": {
+        "title": "Advanced: what's playing",
+        "description": "Templates. Leave empty to copy from the active child.",
+        "data": {
+          "media_title": "Title",
+          "media_artist": "Artist",
+          "media_album_name": "Album",
+          "media_album_artist": "Album artist",
+          "media_series_title": "Series title",
+          "media_season": "Season",
+          "media_episode": "Episode",
+          "media_channel": "Channel",
+          "media_playlist": "Playlist",
+          "media_track": "Track number",
+          "media_content_id": "Content ID",
+          "media_content_type": "Content type",
+          "media_duration": "Duration",
+          "media_position": "Position",
+          "media_position_updated_at": "Position updated at",
+          "media_image_url": "Image URL",
+          "media_image_remotely_accessible": "Image is remotely accessible",
+          "entity_picture": "Entity picture",
+          "app_id": "App ID",
+          "app_name": "App name",
+          "media_content_rating": "Content rating",
+          "media_summary": "Summary"
+        },
+        "data_description": {
+          "media_duration": "Total seconds.",
+          "media_position": "Seconds into the current item.",
+          "media_position_updated_at": "When the position was measured. Filled in automatically if you only give a position.",
+          "entity_picture": "Cover art address.",
+          "media_content_rating": "Shows up as a plain extra attribute.",
+          "media_summary": "Shows up as a plain extra attribute."
+        }
+      },
+      "adv_attributes_player": {
+        "title": "Advanced: player info",
+        "description": "Templates. Leave empty to copy from the active child.",
+        "data": {
+          "volume_level": "Volume level",
+          "is_volume_muted": "Muted",
+          "source": "Current source",
+          "sound_mode": "Current sound mode",
+          "shuffle": "Shuffle",
+          "repeat": "Repeat",
+          "group_members": "Group members",
+          "source_list": "Source list",
+          "sound_mode_list": "Sound mode list"
+        },
+        "data_description": {
+          "volume_level": "A number from 0 to 1.",
+          "repeat": "One of: off, all, one.",
+          "group_members": "A list of entity IDs, or a comma separated list."
+        }
+      },
+      "adv_custom_attributes": {
+        "title": "Advanced: extra attributes",
+        "description": "A YAML dictionary of name: template.",
+        "data": {
+          "custom_attributes": "Extra attributes"
+        }
+      },
+      "adv_services_playback": {
+        "title": "Advanced: playback buttons",
+        "description": "Actions that run when each button is pressed. Leave empty to pass it on to the active child (or do nothing).",
+        "data": {
+          "media_play": "Play",
+          "media_pause": "Pause",
+          "media_stop": "Stop",
+          "media_play_pause": "Play / pause",
+          "media_next_track": "Next track",
+          "media_previous_track": "Previous track",
+          "media_seek": "Seek"
+        }
+      },
+      "adv_services_power": {
+        "title": "Advanced: power and volume buttons",
+        "description": "Actions that run when each button is pressed.",
+        "data": {
+          "turn_on": "Turn on",
+          "turn_off": "Turn off",
+          "toggle": "Toggle power",
+          "volume_up": "Volume up",
+          "volume_down": "Volume down",
+          "volume_mute": "Mute / unmute",
+          "volume_set": "Set volume"
+        }
+      },
+      "adv_services_other": {
+        "title": "Advanced: other buttons",
+        "description": "Actions that run when each button is pressed.",
+        "data": {
+          "repeat_set": "Set repeat",
+          "shuffle_set": "Set shuffle",
+          "play_media": "Play media",
+          "clear_playlist": "Clear playlist",
+          "join": "Join group",
+          "unjoin": "Leave group",
+          "select_source": "Pick a source",
+          "select_sound_mode": "Pick a sound mode"
+        }
+      },
+      "value_active_when": {
+        "title": "{label}: switch child by another entity",
+        "description": "When the entity below is in one of the chosen states, the first child is used. Otherwise the second one is (or the normal automatic choice if you leave it empty).",
+        "data": {
+          "entity": "Entity to watch",
+          "states": "States that select the first child",
+          "child_yes": "Use this child then",
+          "child_no": "Otherwise use this child"
+        },
+        "data_description": {
+          "child_no": "Optional. Leave empty to fall back to the automatic choice."
+        }
+      }
+    },
+    "error": {
+      "invalid_template": "That template has a syntax error.",
+      "invalid_actions": "Those actions aren't valid. Check the YAML.",
+      "invalid_object": "This must be a YAML dictionary (key: value)."
+    }
+  }
+}
