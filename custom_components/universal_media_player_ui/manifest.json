@@ -1,0 +1,17 @@
+{
+  "domain": "universal_media_player_ui",
+  "name": "Universal Media Player (UI)",
+  "codeowners": [
+    "@jonathangibson98"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "media_player"
+  ],
+  "documentation": "https://github.com/jonathangibson98/universal-media-player-ui",
+  "integration_type": "device",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/jonathangibson98/universal-media-player-ui/issues",
+  "requirements": [],
+  "version": "1.0.0"
+}
