@@ -1,5 +1,7 @@
 # Universal Media Player (UI)
 
+[![Open your Home Assistant instance and open Universal Media Player (UI) inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jonathangibson98&repository=universal-media-player-ui&category=integration)
+
 Home Assistant's [universal media player](https://www.home-assistant.io/integrations/universal)
 rebuilt as a custom integration you set up by **pointing and clicking**. No YAML and no
 templates to write: you pick children, entities and actions from lists and the integration
@@ -12,6 +14,10 @@ It follows the same rules as the built-in universal player, and uses the same me
 > `universal` platform. Any universal players you already have in `configuration.yaml` keep working.
 
 ## Install
+[![Open your Home Assistant instance and open Universal Media Player (UI) inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jonathangibson98&repository=universal-media-player-ui&category=integration)
+
+Or by hand:
+
 1. Copy the `universal_media_player_ui` folder into `<your HA config>/custom_components/`
    (the same folder that has `configuration.yaml`), or add this repository to HACS as a custom repository.
 2. Restart Home Assistant.
